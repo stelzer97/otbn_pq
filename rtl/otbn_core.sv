@@ -9,7 +9,7 @@
  *
  * This module is the top-level of the OTBN processing core.
  */
-(* keep_hierarchy = "yes" *) module otbn_core
+module otbn_core
   import otbn_pkg::*;
   
   // PQC - Extension ===============================================================================
@@ -648,7 +648,7 @@
 
   // PQC - Extension ===============================================================================
   
-  (* keep_hierarchy = "yes" *) pq_alu  u_otbn_alu_pqc(
+pq_alu  u_otbn_alu_pqc(
     .operation_i        (alu_pq_operation),
     .rs0_o              (alu_pq_result_rs0),
     .rs1_o              (alu_pq_result_rs1),
@@ -660,7 +660,7 @@
   .operation_result_o(br_pq_result)
   );
   
-  (* keep_hierarchy = "yes" *) twiddle_update    u_otbn_twiddle_update_unit(
+twiddle_update    u_otbn_twiddle_update_unit(
   .clk_i,
   .rst_ni,
   
@@ -687,7 +687,7 @@
   );  
 
 
-  (* keep_hierarchy = "yes" *) reg_addr_unit   u_otbn_reg_addr_unit(
+reg_addr_unit   u_otbn_reg_addr_unit(
   .clk_i,
   .rst_ni,
   

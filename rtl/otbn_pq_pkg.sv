@@ -134,15 +134,14 @@ package otbn_pq_pkg;
     PqsrConst       = 'd7
   } pqspr_e;
 
-
   parameter int PqctrlsprNumWidth = 12;
   typedef enum logic [PqctrlsprNumWidth-1:0] {
-    PqctrlsrM           = 'h001,
-    PqctrlsrJ2          = 'h002,
-    PqctrlsrJ           = 'h003,
-    PqctrlsrIdx0        = 'h004,
-    PqctrlsrIdx1        = 'h005,
-    PqctrlsrMode        = 'h006,
+    PqctrlsrM           = 'h000,
+    PqctrlsrJ2          = 'h001,
+    PqctrlsrJ           = 'h002,
+    PqctrlsrIdx0        = 'h003,
+    PqctrlsrIdx1        = 'h004,
+    PqctrlsrMode        = 'h005,
     PqctrlsrPrime       = 'h010,
     PqctrlsrPrimeDash   = 'h020,
     PqctrlsrTwiddle     = 'h030,
@@ -152,7 +151,7 @@ package otbn_pq_pkg;
     PqctrlsrOmega3      = 'h043,
     PqctrlsrOmega4      = 'h044,
     PqctrlsrOmega5      = 'h045,
-    PqctrlsrOmega6      = 'h046,
+    PqctrlsrOmega6      = 'h046,    
     PqctrlsrOmega7      = 'h047,
     PqctrlsrPsi0        = 'h050,
     PqctrlsrPsi1        = 'h051,
@@ -161,9 +160,9 @@ package otbn_pq_pkg;
     PqctrlsrPsi4        = 'h054,
     PqctrlsrPsi5        = 'h055,
     PqctrlsrPsi6        = 'h056,
-    PqctrlsrPsi7        = 'h057,
+    PqctrlsrPsi7        = 'h057,    
     PqctrlsrOmegaIdx    = 'h060,
-    PqctrlsrPsiIdx     	= 'h070,
+    PqctrlsrPsiIdx      = 'h070,
     PqctrlsrConst       = 'h080
   } pqctrlspr_e;
   
@@ -197,7 +196,7 @@ package otbn_pq_pkg;
     logic [WdrAw-1:0]        a;           // First source register
     logic [WdrAw-1:0]        b;           // Second source register
     
-    logic [PqsprNumWidth-1:0]        pqsr_addr;   // PQSR Address
+    logic [PqsprNumWidth-1:0]            pqsr_addr;   // PQSR Address
     logic [PqctrlsprNumWidth-1:0]        pqctrlsr_addr;   // PQSR Address
     alu_op_pq_e              alu_op;
     op_b_sel_e               alu_op_b_sel;

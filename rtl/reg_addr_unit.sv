@@ -88,28 +88,28 @@ module reg_addr_unit
     
     logic   [7:0]       add_m_jbr;
     
-assign ispr_base_wr_en = |ispr_base_wr_en_i;
+    assign ispr_base_wr_en = |ispr_base_wr_en_i;
+        
+    assign m_srl = {1'b0, m_q[7:1]};
+    assign m_sll = {m_q[6:0], 1'b0};
     
-assign m_srl = {1'b0, m_q[7:1]};
-assign m_sll = {m_q[6:0], 1'b0};
+    assign j2_sll = {j2_q[6:0], 1'b0};
+    assign j2_srl = {1'b0, j2_q[7:1]};
+    
+    assign m_sl = mode_q ? m_sll : m_srl;
+    assign j2_sl = mode_q ? j2_srl : j2_sll;
+    
+    assign j_inc = j_q + 1;
+    
+    assign jbr = {j_q[0], j_q[1], j_q[2], j_q[3], j_q[4], j_q[5], j_q[6], j_q[7]};
+    
+    assign idx0_inc = idx0_q + 1;
+    
+    assign idx1_inc = idx1_q + 1;
+    
+    assign add_m_jbr = jbr + m_q;
 
-assign j2_sll = {j2_q[6:0], 1'b0};
-assign j2_srl = {1'b0, j2_q[7:1]};
-
-assign m_sl = mode_q ? m_sll : m_srl;
-assign j2_sl = mode_q ? j2_srl : j2_sll;
-
-assign j_inc = j_q + 1;
-
-assign jbr = {j_q[0], j_q[1], j_q[2], j_q[3], j_q[4], j_q[5], j_q[6], j_q[7]};
-
-assign idx0_inc = idx0_q + 1;
-
-assign idx1_inc = idx1_q + 1;
-
-assign add_m_jbr = jbr + m_q;
-
-// m Register
+    // m Register
 
     always_ff @(posedge clk_i or negedge rst_ni) begin
         if (!rst_ni) begin
@@ -137,7 +137,7 @@ assign add_m_jbr = jbr + m_q;
                         sl_m_i |
                         ((ispr_addr_i == IsprM) & (ispr_base_wr_en));
 
-// j2 Register
+    // j2 Register
 
     always_ff @(posedge clk_i or negedge rst_ni) begin
         if (!rst_ni) begin
@@ -165,8 +165,8 @@ assign add_m_jbr = jbr + m_q;
                         sl_j2_i |
                         ((ispr_addr_i == IsprJ2) & (ispr_base_wr_en));
 
-// j Register
-
+    // j Register
+    
     always_ff @(posedge clk_i or negedge rst_ni) begin
         if (!rst_ni) begin
             j_q <= '0;
@@ -193,7 +193,7 @@ assign add_m_jbr = jbr + m_q;
                         inc_j_i | 
                         ((ispr_addr_i == IsprJ) & (ispr_base_wr_en));
 
-// idx0 Register
+    // idx0 Register
 
     always_ff @(posedge clk_i or negedge rst_ni) begin
         if (!rst_ni) begin
@@ -222,8 +222,7 @@ assign add_m_jbr = jbr + m_q;
                         set_idx_i | inc_idx_i |
                         ((ispr_addr_i == IsprIdx0) & (ispr_base_wr_en));
 
-// idx1 Register
-
+    // idx1 Register
     always_ff @(posedge clk_i or negedge rst_ni) begin
         if (!rst_ni) begin
             idx1_q <= '0;
@@ -252,8 +251,7 @@ assign add_m_jbr = jbr + m_q;
                         ((ispr_addr_i == IsprIdx0) & (ispr_base_wr_en));
 
 
-// Mode Register
-
+    // Mode Register
     always_ff @(posedge clk_i or negedge rst_ni) begin
         if (!rst_ni) begin
             mode_q <= '0;
@@ -279,24 +277,24 @@ assign add_m_jbr = jbr + m_q;
                         ((ispr_addr_i == IsprMode) & (ispr_base_wr_en));
 
 
-assign wdr0_o = idx0_q[7:3];
-assign wsel0_o = idx0_q[2:0];
-
-assign wdr1_o = idx1_q[7:3];
-assign wsel1_o = idx1_q[2:0];
-
-always_comb begin
-    ispr_rdata_o = m_q;
+    assign wdr0_o = idx0_q[7:3];
+    assign wsel0_o = idx0_q[2:0];
     
-    unique case (ispr_addr_i)
-    IsprM:           ispr_rdata_o = m_q;
-    IsprJ2:          ispr_rdata_o = j2_q;
-    IsprJ:           ispr_rdata_o = j_q;
-    IsprIdx0:        ispr_rdata_o = idx0_q;
-    IsprIdx1:        ispr_rdata_o = idx1_q;
-    IsprMode:        ispr_rdata_o = mode_q;
-    default: ;
-    endcase
-end
+    assign wdr1_o = idx1_q[7:3];
+    assign wsel1_o = idx1_q[2:0];
+    
+    always_comb begin
+        ispr_rdata_o = m_q;
+        
+        unique case (ispr_addr_i)
+        IsprM:           ispr_rdata_o = m_q;
+        IsprJ2:          ispr_rdata_o = j2_q;
+        IsprJ:           ispr_rdata_o = j_q;
+        IsprIdx0:        ispr_rdata_o = idx0_q;
+        IsprIdx1:        ispr_rdata_o = idx1_q;
+        IsprMode:        ispr_rdata_o = mode_q;
+        default: ;
+        endcase
+    end
 
 endmodule: reg_addr_unit

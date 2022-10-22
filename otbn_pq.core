@@ -57,12 +57,21 @@ filesets:
       - lowrisc:prim:ram_1p_adv
       - lowrisc:ip:edn_pkg
       - lowrisc:prim:edn_req
+      - lowrisc:prim:lfsr
+      - lowrisc:prim:cipher_pkg
       - aisec:ip:otbn_pq_pkg:0.1
     files:
       - rtl/otbn_reg_pkg.sv
       - rtl/otbn_reg_top.sv
       - rtl/otbn.sv
     file_type: systemVerilogSource
+
+  files_rtl_tb:
+    files:
+      - dv/sv/tb_tl_ul_pkg.sv
+      - dv/sv/tb_otbn.sv
+    file_type: systemVerilogSource
+
 
   files_verilator_waiver:
     depend:
@@ -141,7 +150,7 @@ targets:
         verilator_options:
           - "-Wall"
 
-  synth:
+  synth: &synth
     default_tool: vivado
     filesets:
       - files_rtl_pq
@@ -152,3 +161,14 @@ targets:
     tools:
       vivado:
         part: "xc7k160tfbg676-1" # CW310 with K410T
+
+  sim:
+    <<: *synth
+    default_tool: vivado
+    filesets_append:
+      - files_rtl_tb
+    toplevel: tb_otbn
+    tools:
+      vivado:
+        part: "xc7k160tfbg676-1" # CW310 with K410T
+
