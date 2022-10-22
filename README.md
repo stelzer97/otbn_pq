@@ -46,7 +46,7 @@ set_property -name {xsim.simulate.runtime} -value {250000ns} -objects [get_files
 ```
 
 ### Results
-Simulation results (Vivado 2020.2 - 22.10.2022)
+Simulation results (Vivado 2020.2 - 07.09.2022)
 
 | Test                     | CC            | Errors  |
 | -------------------------|:-------------:| -----:|
