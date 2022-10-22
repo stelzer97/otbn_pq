@@ -16,11 +16,14 @@ source aisec_ip_otbn_pq_0.1.tcl
 ```
 
 ### Results
-Test synthesis results (Vivado 2020.2)
+Test synthesis results (Vivado 2020.2 - 22.10.2022)
 
-|                          | LUTs          | FFs           | BRAMs         | DSP           | 
+|                          | LUTs          | FFs           | BRAMs         | DSPs          | 
 | -------------------------|:-------------:|:-------------:|:-------------:|:-------------:|
-| OTBN-PQ                  | 33,555        | 13,875        | 10.5          | 49            |
+| **OTBN-PQ**              | **33,555**    | **13,875**    | **10.5**      | **49**        |
+| PQ-ALU                   | 1,797         | 0             | 0             | 11            |
+| Twiddle Update Unit      | 1,632         | 646           | 0             | 22            |
+| Register Address Unit    | 100           | 41            | 0             | 0             |
 
 
 ## Simulate OTBN-PQ Standalone
