@@ -13,7 +13,7 @@ set SETUP_CLOCK_UNCERTAINTY 0.5
 set MAIN_CLK_PIN clk_i
 set MAIN_RST_PIN rst_ni
 # set main clock to 125 MHz
-set MAIN_TCK  8.0
+set MAIN_TCK  50.0
 set_ideal_network ${MAIN_CLK_PIN}
 set_ideal_network ${MAIN_RST_PIN}
 set_clock_uncertainty ${SETUP_CLOCK_UNCERTAINTY} ${MAIN_CLK_PIN}
