@@ -1,5 +1,14 @@
 # otbn_pq
+## Directory Structure
 
+ - [data/](https://github.com/stelzer97/otbn_pq/tree/main/data) contains the instruction sets and register file description
+ - [dv/](https://github.com/stelzer97/otbn_pq/tree/main/dv) contains a testbench and the binary code of test programs
+ - [ref/](https://github.com/stelzer97/otbn_pq/tree/main/ref) contains the reference code for the baseline implementation for the [Ibex](https://github.com/lowRISC/ibex).
+ - [rtl/](https://github.com/stelzer97/otbn_pq/tree/main/rtl) contains the RTL source files
+ - [sw/](https://github.com/stelzer97/otbn_pq/tree/main/sw) contains example programms for the PQ extension
+ - [syn/](https://github.com/stelzer97/otbn_pq/tree/main/syn) contains a constraints file
+ - [util/](https://github.com/stelzer97/otbn_pq/tree/main/util) contains linker and assembler
+ 
 ## Synthesize OTBN-PQ Standalone
 
 With the following commands a build script for standalone test synthesis for the OTBN-PQ for Vivado is generated:
