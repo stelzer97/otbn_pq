@@ -13,10 +13,10 @@
 
 With the following commands a build script for standalone test synthesis for the OTBN-PQ for Vivado is generated:
 ```console
-$ fusesoc --cores-root . run --flag=fileset_top --target=sim --no-export --setup aisec:ip:otbn_pq:0.1
-$ cd build/aisec_ip_otbn_pq_0.1/synth-vivado/
-$ . /tools/Xilinx/Vivado/20XX.XX/settings64.sh
-$ vivado
+fusesoc --cores-root . run --flag=fileset_top --target=synth --no-export --setup aisec:ip:otbn_pq:0.1
+cd build/aisec_ip_otbn_pq_0.1/synth-vivado/
+. /tools/Xilinx/Vivado/20XX.XX/settings64.sh
+vivado
 ```
 
 Within Vivado execute the following commands to generate the project:
@@ -45,10 +45,10 @@ Test synthesis results (Vivado 2022.1 - 22.10.2022)
 
 With the following commands a build script for standalone RTL-simulation environnemnt for the OTBN-PQ for Vivado is generated:
 ```console
-$ fusesoc --cores-root . run --flag=fileset_top --target=synth --no-export --setup aisec:ip:otbn_pq:0.1
-$ cd build/aisec_ip_otbn_pq_0.1/sim-vivado/
-$ . /tools/Xilinx/Vivado/20XX.XX/settings64.sh
-$ vivado
+fusesoc --cores-root . run --flag=fileset_top --target=sim --no-export --setup aisec:ip:otbn_pq:0.1
+cd build/aisec_ip_otbn_pq_0.1/sim-vivado/
+. /tools/Xilinx/Vivado/20XX.XX/settings64.sh
+vivado
 ```
 
 Within Vivado execute the following commands to generate the project and configure the simulator:
