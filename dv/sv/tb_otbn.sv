@@ -36,8 +36,11 @@ module tb_otbn
     
     // Default seed and permutation for URND LFSR
     localparam urnd_lfsr_seed_t       RndCnstUrndLfsrSeed      = RndCnstUrndLfsrSeedDefault;
-    localparam urnd_chunk_lfsr_perm_t RndCnstUrndChunkLfsrPerm = RndCnstUrndChunkLfsrPermDefault;   
-
+    localparam urnd_chunk_lfsr_perm_t RndCnstUrndChunkLfsrPerm = RndCnstUrndChunkLfsrPermDefault;  
+     
+    localparam string                 log_path = "/home/t_stelzer/projects/aisec/opentitan/hw/vendor/aisec_otbn_pq/dv/sv/log/";
+    localparam string                 mem_path = "/home/t_stelzer/projects/aisec/opentitan/hw/vendor/aisec_otbn_pq/dv/sv/";
+    
     // Filehandle, clock cycle counter, readback data variable, teststate
     integer                                     f;   
     integer                                     cc;
@@ -218,7 +221,7 @@ module tb_otbn
         rst_ni = 1;   
         rst_edn_ni = 1;
         
-        f = $fopen("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/log/tl_output.txt","w");
+        f = $fopen({log_path, "tl_output.txt"},"w");
         
         error_count = 0;
         
@@ -267,7 +270,7 @@ module tb_otbn
         $fwrite(f,"-- MUL256\n");
         $fwrite(f,"----------------------------------------------------------------\n");     
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_mul256.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_mul256.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -276,7 +279,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_mul256.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_mul256.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -328,7 +331,7 @@ module tb_otbn
         $fwrite(f,"-- PQ-PQSR\n");
         $fwrite(f,"----------------------------------------------------------------\n");     
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_pqsr.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_pqsr.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -337,7 +340,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_pqsr.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_pqsr.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -395,7 +398,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_pq-add-sub.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_pq-add-sub.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -404,7 +407,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_pq-add-sub.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_pq-add-sub.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -456,7 +459,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_pq-montmul.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_pq-montmul.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -465,7 +468,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_pq-montmul.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_pq-montmul.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -517,7 +520,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_pq_bf.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_pq_bf.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -526,7 +529,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_pq_bf.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_pq_bf.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -578,7 +581,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_opt_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_opt_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -587,7 +590,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_opt_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_opt_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -883,7 +886,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_inv_opt_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_inv_opt_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -892,7 +895,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_inv_opt_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_inv_opt_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -1188,7 +1191,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_opt_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_opt_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -1197,7 +1200,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_opt_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_opt_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -1493,7 +1496,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_inv_opt_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_inv_opt_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -1502,7 +1505,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_inv_opt_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_inv_opt_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -1797,7 +1800,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_ind_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_ind_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -1806,7 +1809,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_ind_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_ind_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -2101,7 +2104,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_inv_ind_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_inv_ind_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -2110,7 +2113,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_inv_ind_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_inv_ind_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -2406,7 +2409,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_ind_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_ind_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -2415,7 +2418,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_ind_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_ind_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -2711,7 +2714,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_inv_ind_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_inv_ind_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -2720,7 +2723,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_inv_ind_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_inv_ind_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -3017,7 +3020,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_ind_falcon512.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_ind_falcon512.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -3026,7 +3029,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_ind_falcon512.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_ind_falcon512.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -3579,7 +3582,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_inv_ind_falcon512.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_inv_ind_falcon512.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -3588,7 +3591,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_inv_ind_falcon512.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_inv_ind_falcon512.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -4139,7 +4142,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_ind_falcon1024.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_ind_falcon1024.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -4148,7 +4151,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_ind_falcon1024.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_ind_falcon1024.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -5213,7 +5216,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_ntt_inv_ind_falcon1024.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_ntt_inv_ind_falcon1024.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -5222,7 +5225,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_ntt_inv_ind_falcon1024.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_ntt_inv_ind_falcon1024.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -6287,7 +6290,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_mul_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_mul_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -6296,7 +6299,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_mul_dilithium.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_mul_dilithium.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -6592,7 +6595,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_mul_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_mul_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -6601,7 +6604,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_mul_kyber.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_mul_kyber.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -6896,7 +6899,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_mul_falcon512.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_mul_falcon512.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -6905,7 +6908,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_mul_falcon512.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_mul_falcon512.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
@@ -7457,7 +7460,7 @@ module tb_otbn
         $fwrite(f,"----------------------------------------------------------------\n");   
              
         // Write IMEM from File
-        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/imem_mul_falcon1024.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_imem_from_file_tl_ul(.log_filehandle(f), .imem_file_path({mem_path, "imem_mul_falcon1024.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
         
         $fwrite(f,"-- IMEM\n");
         // Read IMEM  
@@ -7466,7 +7469,7 @@ module tb_otbn
         end     
  
          // Write DMEM from File
-        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path("/home/t_stelzer/projects/2022-MA-PQ-ALU-OpenTitan/opentitan/hw/ip/otbn/dv/sv/dmem_mul_falcon1024.txt"), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
+        write_dmem_from_file_tl_ul(.log_filehandle(f), .dmem_file_path({mem_path, "dmem_mul_falcon1024.txt"}), .clk(clk_i), .clk_cycles(cc), .start_address(0), .tl_o(tl_o), .tl_i(tl_i_d) );
 
         $fwrite(f,"-- DMEM\n");
         // Read DMEM  
