@@ -1,4 +1,13 @@
 # otbn_pq
+
+This version of the OTBN with PQ-Extension works with the **earlgrey_silver_release_v5** of the OpenTitan.
+
+To checkout this commit/tag use the following command:
+```console
+git checkout earlgrey_silver_release_v5
+```
+
+
 ## Directory Structure
 
  - [data/](https://github.com/stelzer97/otbn_pq/tree/main/data) contains the instruction sets and register file description
