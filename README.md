@@ -24,7 +24,7 @@ With the following commands a build script for standalone test synthesis for the
 ```console
 fusesoc --cores-root . run --flag=fileset_top --target=synth --no-export --setup aisec:ip:otbn_pq:0.1
 cd build/aisec_ip_otbn_pq_0.1/synth-vivado/
-. /tools/Xilinx/Vivado/20XX.XX/settings64.sh
+. /tools/Xilinx/Vivado/2020.2/settings64.sh
 vivado
 ```
 
@@ -56,7 +56,7 @@ With the following commands a build script for standalone RTL-simulation environ
 ```console
 fusesoc --cores-root . run --flag=fileset_top --target=sim --no-export --setup aisec:ip:otbn_pq:0.1
 cd build/aisec_ip_otbn_pq_0.1/sim-vivado/
-. /tools/Xilinx/Vivado/20XX.XX/settings64.sh
+. /tools/Xilinx/Vivado/2020.2/settings64.sh
 vivado
 ```
 
