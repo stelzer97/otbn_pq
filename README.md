@@ -68,6 +68,12 @@ set_property top tb_otbn [get_filesets sim_1]
 set_property top_lib xil_defaultlib [get_filesets sim_1]
 set_property -name {xsim.simulate.runtime} -value {250000ns} -objects [get_filesets sim_1]
 ```
+Within the [tb_otbn design unit](https://github.com/stelzer97/otbn_pq/blob/main/dv/sv/tb_otbn.sv) the paths to the [tests](https://github.com/stelzer97/otbn_pq/tree/main/dv/sv) and the [log file](https://github.com/stelzer97/otbn_pq/tree/main/dv/sv/log) have to be set accordinly:
+
+```console
+localparam string                 log_path = "/home/user/projects/aisec/opentitan/hw/vendor/aisec_otbn_pq/dv/sv/log/";
+localparam string                 mem_path = "/home/user/projects/aisec/opentitan/hw/vendor/aisec_otbn_pq/dv/sv/";
+```
 
 ### Results
 Simulation results (Vivado 2020.2 - 07.09.2022)
